@@ -57,3 +57,55 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+Backend Sistema Linear – FastAPI
+Descrição
+
+Este backend permite resolver sistemas lineares, retornando:
+
+Sistema escalonado
+
+Classificação (SPD, SPI, SI)
+
+Resultado ou mensagem de solução
+
+Feito com FastAPI.
+
+Pré-requisitos
+
+Python 3.10 ou superior
+
+pip (gerenciador de pacotes)
+
+1. Criar ambiente virtual
+
+No terminal, dentro da pasta do projeto:
+
+# Windows
+python -m venv venv
+venv\Scripts\activate
+
+# Linux / Mac
+python3 -m venv venv
+source venv/bin/activate
+
+2. Instalar dependências
+pip install fastapi uvicorn pydantic
+
+
+Opcional: gerar requirements.txt para compartilhar:
+
+pip freeze > requirements.txt
+
+3. Rodar o servidor
+uvicorn api:app --reload
+
+
+api → nome do arquivo Python (por exemplo main.py)
+
+--reload → reinicia automaticamente ao alterar o código
+
+O backend estará disponível em:
+
+http://127.0.0.1:8000
+
