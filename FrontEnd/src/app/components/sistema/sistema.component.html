@@ -1,0 +1,72 @@
+<div class="p-4">
+  <h2>Resolver Sistema Linear</h2>
+
+  <div class="mb-4">
+    <label>Tamanho do sistema:
+      <input type="number" [(ngModel)]="tamanho" min="1" max="10" (change)="alterarTamanho()" />
+    </label>
+  </div>
+
+  <form [formGroup]="form" class="mb-4">
+    <div formArrayName="A">
+      <div *ngFor="let row of matrizA.controls; let i = index" [formGroupName]="i" class="flex gap-2 mb-2">
+        <input *ngFor="let col of getLinhaA(i).controls; let j = index"
+               [formControlName]="j"
+               type="number"
+               class="border p-1 w-16" />
+      </div>
+    </div>
+
+    <div formArrayName="b" class="flex gap-2 mb-4">
+      <input *ngFor="let control of vetorB.controls; let i = index"
+             [formControlName]="i"
+             type="number"
+             class="border p-1 w-16" />
+    </div>
+
+    <button type="button" (click)="resolver()">Calcular</button>
+  </form>
+
+  <!-- Sistema Original -->
+  <div *ngIf="resultado" class="mb-4">
+    <h3>Sistema Original:</h3>
+    <div *ngFor="let row of matrizA.controls; let i = index">
+      <span *ngFor="let col of getLinhaA(i).controls; let j = index">
+        {{ col.value }}{{ getVariavel(j) }}
+        <span *ngIf="j < getLinhaA(i).controls.length - 1"> + </span>
+      </span>
+      = {{ vetorB.at(i).value }}
+    </div>
+  </div>
+
+  <div *ngIf="resultado?.escalonado">
+    <h3>Sistema Escalonado:</h3>
+    <div *ngFor="let row of resultado?.escalonado.A; let i = index">
+        <span *ngFor="let val of row; let j = index">
+        {{ val }}{{ getVariavel(j) }}
+        <span *ngIf="j < row.length - 1"> + </span>
+        </span>
+        = {{ resultado?.escalonado.b[i] }}
+    </div>
+    </div>
+
+    <!-- Classificação -->
+  <div *ngIf="resultado" class="mb-4">
+    <h3>Classificação do Sistema: {{ resultado.classificacao }}</h3>
+  </div>
+
+  <!-- Resultado -->
+  <div *ngIf="resultado">
+    <h3>Resultado:</h3>
+    <div *ngIf="resultado.classificacao === 'SPD'">
+      <ul>
+        <li *ngFor="let item of (resultado.resultado | keyvalue)">
+          {{ item.key }} = {{ item.value }}
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="resultado.classificacao !== 'SPD'">
+      <p>{{ resultado.resultado }}</p>
+    </div>
+  </div>
+</div>
