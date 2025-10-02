@@ -78,21 +78,27 @@ Python 3.10 ou superior
 pip (gerenciador de pacotes)
 
 1. Instalar dependências
+```bash
 pip install fastapi uvicorn pydantic
+```
 
 Opcional: gerar requirements.txt para compartilhar:
 
+```bash
 pip freeze > requirements.txt
+```
 
 2. Rodar o servidor
+ ```bash
 uvicorn api:app --reload
-
+```
 
 api → nome do arquivo Python (por exemplo main.py)
 
 --reload → reinicia automaticamente ao alterar o código
 
 O backend estará disponível em:
-
+```bash
 http://127.0.0.1:8000
+```
 
