@@ -9,23 +9,23 @@
 
   <form [formGroup]="form" class="mb-4">
     <div formArrayName="A">
-      <div *ngFor="let row of matrizA.controls; let i = index" [formGroupName]="i" class="flex gap-2 mb-2">
+      <div *ngFor="let row of matrizA.controls; let i = index" [formGroupName]="i" class="flex gap-2 items-center mb-2">
+        <!-- Inputs da matriz A -->
         <input *ngFor="let col of getLinhaA(i).controls; let j = index"
-               [formControlName]="j"
-               type="number"
-               class="border p-1 w-16" />
+              [formControlName]="j"
+              type="number"
+              class="border p-1 w-16" />
+
+        <!-- Input do b correspondente -->
+        <span>=</span>
+        <input [formControl]="getB(i)" type="number" class="border p-1 w-16" />
       </div>
     </div>
 
-    <div formArrayName="b" class="flex gap-2 mb-4">
-      <input *ngFor="let control of vetorB.controls; let i = index"
-             [formControlName]="i"
-             type="number"
-             class="border p-1 w-16" />
-    </div>
 
     <button type="button" (click)="resolver()">Calcular</button>
   </form>
+
 
   <!-- Sistema Original -->
   <div *ngIf="resultado" class="mb-4">
@@ -56,7 +56,7 @@
   </div>
 
   <!-- Resultado -->
-  <div *ngIf="resultado">
+  <div *ngIf="resultado" #resultadoContainer>
     <h3>Resultado:</h3>
     <div *ngIf="resultado.classificacao === 'SPD'">
       <ul>
